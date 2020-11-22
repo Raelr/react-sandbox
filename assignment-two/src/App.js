@@ -6,27 +6,45 @@ import Char from './CharComponent/CharComponent'
 class App extends Component {
   state = {
     input : '',
-    length : 0
+    inputArray : [],
+    length : 0,
   }
 
   stringEnteredHandler = (event) => {
+    
     const input = event.target.value;
     const length = input.length;
-    this.setState({input: event.target.value, length: length})
+    const inputArray = input.split('')
+    let newArray = [...inputArray];
+    inputArray.forEach((element,index) => {
+      newArray[index] = {char: element, id: element + Date.now()};
+    });
+
+    console.log(newArray)
+    this.setState({input: event.target.value, inputArray: newArray, length: length});
+  }
+
+  deleteCharHandler = (index) => {
+    let strArray = [...this.state.inputArray]
+    strArray.splice(index, 1)
+    const str = strArray.join('')
+    this.setState({input: str, inputArray: strArray, length: strArray.length})
   }
 
   render() {
 
-    const inputArray = this.state.input.split('')
-
     let chars = null;
 
-    if (inputArray.length > 0) {
+    if (this.state.inputArray.length > 0) {
       chars = (
         <div>
-          {inputArray.map((char, index) => {
+          {this.state.inputArray.map((char, index) => {
             return (
-              <Char char={char} />
+              <Char 
+                click={() => this.deleteCharHandler(index)} 
+                char={char.char} 
+                index={index}
+                key={char.id} />
             );
           })}
         </div>

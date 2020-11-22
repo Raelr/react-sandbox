@@ -2,7 +2,6 @@ import React from 'react';
 import './Validation.css'
 
 const validation = (props) => {
-    console.log(props)
     const isTooShort = (
         props.length < 5
     );
