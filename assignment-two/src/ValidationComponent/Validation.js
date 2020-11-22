@@ -7,8 +7,6 @@ const validation = (props) => {
         props.length < 5
     );
 
-    console.log(props.length)
-
     const message = isTooShort ? 'Text too short!' : 'Text is long enough!';
 
     return (
