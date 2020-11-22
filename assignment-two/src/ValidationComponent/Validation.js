@@ -10,7 +10,7 @@ const validation = (props) => {
 
     return (
         <div>
-            <p>{message}</p>
+            <p><b>{message}</b></p>
         </div>
     );
 }

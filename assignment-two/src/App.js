@@ -13,29 +13,35 @@ class App extends Component {
   stringEnteredHandler = (event) => {
     
     const input = event.target.value;
-    const length = input.length;
-    const inputArray = input.split('')
-    let newArray = [...inputArray];
-    inputArray.forEach((element,index) => {
-      newArray[index] = {char: element, id: element + Date.now()};
-    });
-
-    console.log(newArray)
-    this.setState({input: event.target.value, inputArray: newArray, length: length});
+    let newArray = [];
+    input.split('').forEach((element, index) => {
+      newArray.push({char: element, id: element +  index})
+    })
+    this.setState({input: input, inputArray: newArray, length: input.length});
   }
 
   deleteCharHandler = (index) => {
     let strArray = [...this.state.inputArray]
     strArray.splice(index, 1)
-    const str = strArray.join('')
-    this.setState({input: str, inputArray: strArray, length: strArray.length})
+    let newStr = [];
+    strArray.forEach(element => {
+      newStr.push(element.char);
+    });
+    this.setState({input: newStr.join(''), inputArray: strArray, length: strArray.length})
   }
 
   render() {
+    const style = {
+      padding: '2%',
+      fontSize: '20px',
+      fontFamily: 'Courier New',
+      margin: 'auto'
+    }
 
     let chars = null;
 
     if (this.state.inputArray.length > 0) {
+      console.log(this.state.inputArray)
       chars = (
         <div>
           {this.state.inputArray.map((char, index) => {
@@ -52,9 +58,9 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <input type='text' onChange={(event) => this.stringEnteredHandler(event)} value={this.state.input}></input>
-        <p>Length: {this.state.length}</p>
+      <div style={style} className="App">
+        <textarea className="str-input" type='text' onChange={(event) => this.stringEnteredHandler(event)} value={this.state.input}></textarea>
+        <p><b>Length:</b> {this.state.length}</p>
         <Validation length={this.state.length}/>
         {chars}
       </div>
