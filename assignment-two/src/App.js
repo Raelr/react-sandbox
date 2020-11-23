@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.module.css';
 import Validation from './ValidationComponent/Validation'
 import Char from './CharComponent/CharComponent'
 
@@ -31,13 +31,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      padding: '2%',
-      fontSize: '20px',
-      fontFamily: 'Courier New',
-      margin: 'auto'
-    }
-
     let chars = null;
 
     if (this.state.inputArray.length > 0) {
@@ -58,8 +51,8 @@ class App extends Component {
     }
 
     return (
-      <div style={style} className="App">
-        <textarea className="str-input" type='text' onChange={(event) => this.stringEnteredHandler(event)} value={this.state.input}></textarea>
+      <div className={styles.App}>
+        <textarea className={styles.StrInput} type='text' onChange={(event) => this.stringEnteredHandler(event)} value={this.state.input}></textarea>
         <p><b>Length:</b> {this.state.length}</p>
         <Validation length={this.state.length}/>
         {chars}
