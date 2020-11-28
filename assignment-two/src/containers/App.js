@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+
 import styles from './App.module.css';
-import Validation from './ValidationComponent/Validation'
-import Char from './CharComponent/CharComponent'
+
+import Validation from '../components/ValidationComponent/Validation'
+import CharList from '../components/CharList/CharList'
+import StringInput from '../components/StringInput/StringInput'
 
 class App extends Component {
   state = {
@@ -31,31 +34,18 @@ class App extends Component {
   }
 
   render() {
-    let chars = null;
-
-    if (this.state.inputArray.length > 0) {
-      console.log(this.state.inputArray)
-      chars = (
-        <div>
-          {this.state.inputArray.map((char, index) => {
-            return (
-              <Char 
-                click={() => this.deleteCharHandler(index)} 
-                char={char.char} 
-                index={index}
-                key={char.id} />
-            );
-          })}
-        </div>
-      );
-    }
 
     return (
       <div className={styles.App}>
-        <textarea className={styles.StrInput} type='text' onChange={(event) => this.stringEnteredHandler(event)} value={this.state.input}></textarea>
-        <p><b>Length:</b> {this.state.length}</p>
+        <StringInput 
+          stringEntered = {this.stringEnteredHandler}
+          length = {this.state.length}
+          input = {this.state.input}
+        /> 
         <Validation length={this.state.length}/>
-        {chars}
+        <CharList 
+          inputArray = {this.state.inputArray} 
+          clicked = {this.deleteCharHandler}/>
       </div>
     );
   }
