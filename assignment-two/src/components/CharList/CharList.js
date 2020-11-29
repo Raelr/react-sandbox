@@ -1,7 +1,7 @@
 import React from 'react'
 import Char from './CharComponent/CharComponent'
 
-const CharList = (props) => props.inputArray.map((char, index) => {
+const charList = (props) => props.inputArray.map((char, index) => {
         return (
           <Char 
             click={() => props.clicked(index)} 
@@ -12,4 +12,4 @@ const CharList = (props) => props.inputArray.map((char, index) => {
     }
 );
 
-export default CharList;
+export default charList;

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './StringInput.module.css'
 
-const StringInput = (props) => {
+const stringInput = (props) => {
     return (
         <div >
             <textarea className={styles.StrInput} type='text' onChange={(event) => props.stringEntered(event)} value={props.input}></textarea>
@@ -10,4 +10,4 @@ const StringInput = (props) => {
     );
 }
 
-export default StringInput;
+export default React.memo(stringInput);
