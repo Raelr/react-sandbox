@@ -1,0 +1,26 @@
+.Button {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 20px;
+    background-color: white;
+    font-size: 14px;
+    animation-name: end-hover;
+    animation-duration: 0.25s;
+}
+
+.Button:hover {
+    animation-name: start-hover;
+    animation-duration: 0.25s;
+    font-size: 20px;
+}
+
+@keyframes start-hover {
+    0% {font-size: 14px}
+    100% {font-size: 20px}
+}
+
+@keyframes end-hover {
+    0% {font-size: 20px}
+    100% {font-size: 14px}
+}

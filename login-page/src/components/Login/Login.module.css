@@ -1,0 +1,11 @@
+.Login {
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    width: 350px;
+    height: 250px;
+    padding: 2%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+    overflow: hidden;
+}
