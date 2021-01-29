@@ -1,5 +1,6 @@
 .Button {
-    border: 1px solid black;
+    border: none;
+    box-shadow: 1px 1px 2px black;
     border-radius: 5px;
     padding: 5px;
     margin-top: 20px;
@@ -7,6 +8,7 @@
     font-size: 14px;
     animation-name: end-hover;
     animation-duration: 0.25s;
+    width: 200px;
 }
 
 .Button:hover {

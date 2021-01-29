@@ -1,14 +1,16 @@
 import React from 'react'
 import Button from '../../UI/Button/Button'
+import Label from '../../UI/Label/Label'
+import Input from '../../UI/Input/Input'
 
 const loginUser = (props) => (
     <form>
-        <label for='username'>Username:</label>
+        <Label for='username'>Username:</Label>
         <br/>
-        <input type='text' id='username' name='username'></input><br/>
-        <label for='password'>Password:</label>
+        <Input type='text' id='username' name='username'></Input><br/>
+        <Label for='password'>Password:</Label>
         <br/>
-        <input type='password' id='password' name='password'></input>
+        <Input type='password' id='password' name='password'></Input>
         <br/>
         <Button>
             Login
