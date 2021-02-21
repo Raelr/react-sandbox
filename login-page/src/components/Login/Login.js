@@ -1,12 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './Login.module.css'
 import LoginUser from './LoginUser/LoginUser'
+import axios from '../../axios-users'
 
-const login = (props) => (
-    <div className={classes.Login}>
+const Login = (props) => {
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/app/users?id=80&name=Aryeh')
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, [])
+
+    const [userInfo, setUserInfo] = useState({username: "", password: ""})
+
+    const loginUserHandler = (event) => {
+        event.preventDefault()
+        axios.get('http://localhost:8080/app/users/authentication?username='+userInfo.username+'&password='+userInfo.password)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    const userNameUpdateHandler = (event) => {
+        let input = event.target.value
+        setUserInfo({username: input, password: userInfo.password})
+    }
+
+    const passwordUpdateHander = (event) => {
+        let input = event.target.value
+        setUserInfo({username: userInfo.username, password: input})
+    }
+
+    return (
+        <div className={classes.Login}>
         <h1>LOGIN PAGE</h1>
-        <LoginUser />
-    </div>
-);
+        <LoginUser 
+            loginHandler={loginUserHandler}
+            updateUsernameHandler={userNameUpdateHandler}
+            passwordUpdateHandler={passwordUpdateHander}    
+        />
+        </div>
+    );
+};
 
-export default login;
+export default Login;

@@ -9,6 +9,7 @@
     animation-name: unselected;
     animation-duration: 0.25s;
     animation-timing-function: ease-out;
+    text-align: center;
 }
 
 Input:focus {
