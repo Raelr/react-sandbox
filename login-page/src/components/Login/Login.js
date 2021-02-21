@@ -5,16 +5,6 @@ import axios from '../../axios-users'
 
 const Login = (props) => {
 
-    useEffect(() => {
-        axios.get('http://localhost:8080/app/users?id=80&name=Aryeh')
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }, [])
-
     const [userInfo, setUserInfo] = useState({username: "", password: ""})
 
     const loginUserHandler = (event) => {
