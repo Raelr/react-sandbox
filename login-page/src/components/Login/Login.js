@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import classes from './Login.module.css'
 import LoginUser from './LoginUser/LoginUser'
 import axios from '../../axios-users'
+import bcrypt from 'bcryptjs'
+
+const salt = bcrypt.genSaltSync(10);
 
 const Login = (props) => {
 
@@ -9,12 +12,18 @@ const Login = (props) => {
 
     const loginUserHandler = (event) => {
         event.preventDefault()
-        axios.get('http://localhost:8080/app/users/authentication?username='+userInfo.username+'&password='+userInfo.password)
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.log(error)
+
+        bcrypt.hash(userInfo.password, salt, (err, hash) => {
+
+            axios.get('http://localhost:8080/app/users/authentication?username='+userInfo.username+'&password='+hash)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+            console.log(hash)
         })
     }
 
