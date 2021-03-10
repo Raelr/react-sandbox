@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './Label.module.css'
 
 const label = (props) => (
-    <label className={classes.Label} for={props.for}>
+    <label className={classes.Label} htmlFor={props.label}>
         {props.children}
     </label>
 );

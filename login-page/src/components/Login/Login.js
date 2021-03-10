@@ -46,7 +46,7 @@ const Login = () => {
             passwordUpdateHandler={passwordUpdateHander}
         />
     
-    let loginMessage = 'Don\'t have an account? Register';
+    let loginMessage = 'Don\'t have an account? Register ';
 
     if (isRegisteringUser) {
         login = <p>Register User</p>
@@ -57,12 +57,14 @@ const Login = () => {
         <div className={classes.Login}>
             <h1>LOGIN PAGE</h1>
             {login}
-            <p style={{position:'absolute',bottom:0,left:'15%',textAlign:'center'}}>
-                {loginMessage} 
-                <span>
-                    <p style={{display:'inline',color:'blue'}} onClick={registerUserHandler}> Here!</p>
-                </span>
-            </p>
+            <div className={classes.RegisterDiv}>
+                <p>
+                    {loginMessage} 
+                    <span className={classes.RegisterLink} onClick={registerUserHandler}>
+                        Here!
+                    </span>
+                </p>
+            </div>
         </div>
     );
 };

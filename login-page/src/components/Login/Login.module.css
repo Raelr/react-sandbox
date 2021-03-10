@@ -10,3 +10,20 @@
     overflow: hidden;
     position: relative;
 }
+
+.RegisterDiv {
+    position: absolute;
+    bottom: 0;
+    width: inherit;
+    margin-bottom: 15px;
+}
+
+.RegisterLink {
+    display: inline;
+    color:blue
+}
+
+.RegisterLink:hover {
+    cursor:pointer;
+    text-decoration: underline;
+}
