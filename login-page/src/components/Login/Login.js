@@ -31,7 +31,18 @@ const Login = () => {
     const registerUserhander = (event) => {
         event.preventDefault()
 
-        console.log('registering user')
+        axios({
+            method: 'post',
+            url: '/app/users/register',
+            data: {
+                username: userInfo.username,
+                password: userInfo.password
+            },
+        }).then((response) => {
+            console.log(response.data)
+        }).catch(error => {
+            console.log(error)
+        });
     }
 
     const userNameUpdateHandler = (event) => {
@@ -46,7 +57,7 @@ const Login = () => {
 
     const confirmPasswordUpdateHandler = (event) => {
         let input = event.target.value
-        setIsMatchingPasswords(input === userInfo.password)
+        setIsMatchingPasswords((input === userInfo.password) || (input.length > 0 && userInfo.password.length > 0))
     }
 
     const selectRegisterUserHandler = () => {
@@ -75,7 +86,7 @@ const Login = () => {
 
     return (
         <div className={isRegisteringUser ? [classes.Login,classes['Register']].join(' ') : classes.Login}>
-            <h1>LOGIN PAGE</h1>
+            <h1>{isRegisteringUser ? 'REGISTER USER' : 'LOGIN PAGE'}</h1>
             {login}
             <div className={classes.RegisterDiv}>
                 <p>

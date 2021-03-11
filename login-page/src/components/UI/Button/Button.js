@@ -6,11 +6,11 @@ const Button = (props) => {
     const [buttonClass, setButtonClass] = useState(classes.Button)
 
     const onHoverHandler = () => {
-        setButtonClass([classes.Button,classes['MouseOver']].join(' '))
+        if (!props.isDisabled) setButtonClass([classes.Button,classes['MouseOver']].join(' '))
     }
 
     const onHoverExitHander = () => {
-        setButtonClass([classes.Button,classes['MouseExit']].join(' '))
+        if (!props.isDisabled) setButtonClass([classes.Button,classes['MouseExit']].join(' '))
     }
     
     return (
