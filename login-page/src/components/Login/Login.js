@@ -57,7 +57,7 @@ const Login = () => {
 
     const confirmPasswordUpdateHandler = (event) => {
         let input = event.target.value
-        setIsMatchingPasswords((input === userInfo.password) || (input.length > 0 && userInfo.password.length > 0))
+        setIsMatchingPasswords(input === userInfo.password && (input.length > 0 && userInfo.password.length > 0))
     }
 
     const selectRegisterUserHandler = () => {
