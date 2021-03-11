@@ -15,7 +15,7 @@ const Button = (props) => {
     
     return (
         <button
-            className={buttonClass} onMouseEnter={onHoverHandler} onMouseLeave={onHoverExitHander} onClick={(event) => props.onClick(event)}>
+            className={buttonClass} disabled={props.isDisabled} onMouseEnter={onHoverHandler} onMouseLeave={onHoverExitHander} onClick={(event) => props.onClick(event)}>
             {props.children}
         </button>
     )

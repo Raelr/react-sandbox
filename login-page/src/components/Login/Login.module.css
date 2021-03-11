@@ -11,6 +11,10 @@
     position: relative;
 }
 
+.Login.Register {
+    height: 400px
+}
+
 .RegisterDiv {
     position: absolute;
     bottom: 0;

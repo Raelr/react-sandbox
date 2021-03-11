@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import classes from './Login.module.css'
 import LoginUser from './LoginUser/LoginUser'
+import LoginRegisterUser from './LoginRegisterUser/LoginRegisterUser'
 import axios from '../../axios-users'
 
 const Login = () => {
 
-    const [userInfo, setUserInfo] = useState({username: "", password: ""})
+    const [userInfo, setUserInfo] = useState({username: "",password: ""})
     const [isRegisteringUser, setIsRegisteringUser] = useState(false)
+    const [isMatchingPasswords, setIsMatchingPasswords] = useState(false)
 
     const loginUserHandler = (event) => {
         event.preventDefault()
@@ -26,41 +28,59 @@ const Login = () => {
         });
     }
 
+    const registerUserhander = (event) => {
+        event.preventDefault()
+
+        console.log('registering user')
+    }
+
     const userNameUpdateHandler = (event) => {
         let input = event.target.value
         setUserInfo({username: input, password: userInfo.password})
     }
 
-    const passwordUpdateHander = (event) => {
+    const passwordUpdateHandler = (event) => {
         let input = event.target.value
         setUserInfo({username: userInfo.username, password: input})
     }
 
-    const registerUserHandler = () => {
+    const confirmPasswordUpdateHandler = (event) => {
+        let input = event.target.value
+        setIsMatchingPasswords(input === userInfo.password)
+    }
+
+    const selectRegisterUserHandler = () => {
         setIsRegisteringUser(!isRegisteringUser)
+        setUserInfo({username: "", password: ""})
     }
 
     let login = <LoginUser 
             loginHandler={loginUserHandler} 
             updateUsernameHandler={userNameUpdateHandler}
-            passwordUpdateHandler={passwordUpdateHander}
+            passwordUpdateHandler={passwordUpdateHandler}
         />
     
     let loginMessage = 'Don\'t have an account? Register ';
 
     if (isRegisteringUser) {
-        login = <p>Register User</p>
+        login = <LoginRegisterUser
+            registerHandler={registerUserhander}
+            updateUsernameHandler={userNameUpdateHandler}
+            passwordUpdateHandler={passwordUpdateHandler}
+            confirmPasswordUpdateHandler={confirmPasswordUpdateHandler}
+            isDisabled={(!isMatchingPasswords || !userInfo.username.length > 0)}
+        />
         loginMessage = 'Already have an account? Login '
     }
 
     return (
-        <div className={classes.Login}>
+        <div className={isRegisteringUser ? [classes.Login,classes['Register']].join(' ') : classes.Login}>
             <h1>LOGIN PAGE</h1>
             {login}
             <div className={classes.RegisterDiv}>
                 <p>
                     {loginMessage} 
-                    <span className={classes.RegisterLink} onClick={registerUserHandler}>
+                    <span className={classes.RegisterLink} onClick={selectRegisterUserHandler}>
                         Here!
                     </span>
                 </p>
