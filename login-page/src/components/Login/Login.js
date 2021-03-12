@@ -3,25 +3,35 @@ import classes from './Login.module.css'
 import LoginUser from './LoginUser/LoginUser'
 import LoginRegisterUser from './LoginRegisterUser/LoginRegisterUser'
 import axios from '../../axios-users'
+import Spinner from '../UI/Spinner/Spinner'
 
 const Login = () => {
 
-    const [userInfo, setUserInfo] = useState({username: "",password: ""})
-    const [isRegisteringUser, setIsRegisteringUser] = useState(false)
+    const [userInfo, setUserInfo] = useState({username: "",password: "", isRegisteringUser: false})
     const [isMatchingPasswords, setIsMatchingPasswords] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const [loginStyle, setLoginStyle] = useState([classes.Login, classes['Default']]);
+    let loginClass = loginStyle;
 
     const loginUserHandler = (event) => {
         event.preventDefault()
 
+        setIsLoading(true)
+
         axios({
             method: 'post',
             url: '/app/users/authentication',
-            baseURL: 'http://localhost:8080',
             data: {
                 username: userInfo.username,
                 password: userInfo.password
             },
         }).then((response) => {
+            setIsLoading(false)
+            loginClass = loginStyle;
+
+            loginClass.splice(loginClass.indexOf(classes['Loading']))
+            setLoginStyle([...loginClass, classes['Close']])
+                
             console.log(response.data)
         }).catch(error => {
             console.log(error)
@@ -31,6 +41,8 @@ const Login = () => {
     const registerUserhander = (event) => {
         event.preventDefault()
 
+        setIsLoading(true)
+
         axios({
             method: 'post',
             url: '/app/users/register',
@@ -39,6 +51,7 @@ const Login = () => {
                 password: userInfo.password
             },
         }).then((response) => {
+            setIsLoading(false)
             console.log(response.data)
         }).catch(error => {
             console.log(error)
@@ -47,12 +60,12 @@ const Login = () => {
 
     const userNameUpdateHandler = (event) => {
         let input = event.target.value
-        setUserInfo({username: input, password: userInfo.password})
+        setUserInfo({username: input, password: userInfo.password, isRegisteringUser: userInfo.isRegisteringUser})
     }
 
     const passwordUpdateHandler = (event) => {
         let input = event.target.value
-        setUserInfo({username: userInfo.username, password: input})
+        setUserInfo({username: userInfo.username, password: input, isRegisteringUser: userInfo.isRegisteringUser})
     }
 
     const confirmPasswordUpdateHandler = (event) => {
@@ -61,33 +74,49 @@ const Login = () => {
     }
 
     const selectRegisterUserHandler = () => {
-        setIsRegisteringUser(!isRegisteringUser)
-        setUserInfo({username: "", password: ""})
+        setUserInfo({username: "", password: "", isRegisteringUser: !userInfo.isRegisteringUser})
     }
 
     let login = <LoginUser 
             loginHandler={loginUserHandler} 
             updateUsernameHandler={userNameUpdateHandler}
             passwordUpdateHandler={passwordUpdateHandler}
+            isDisabled={isLoading}
         />
     
     let loginMessage = 'Don\'t have an account? Register ';
 
-    if (isRegisteringUser) {
+    if (userInfo.isRegisteringUser) {
         login = <LoginRegisterUser
             registerHandler={registerUserhander}
             updateUsernameHandler={userNameUpdateHandler}
             passwordUpdateHandler={passwordUpdateHandler}
             confirmPasswordUpdateHandler={confirmPasswordUpdateHandler}
-            isDisabled={(!isMatchingPasswords || !userInfo.username.length > 0)}
+            isDisabled={(!isMatchingPasswords || !userInfo.username.length > 0 || isLoading)}
         />
         loginMessage = 'Already have an account? Login '
     }
 
+    if (isLoading && !loginClass.find((style) => style === classes['Loading']) ) {
+        console.log('is loading')
+        loginClass.splice(loginClass.indexOf(classes['Default']))
+        loginClass.push(classes["Loading"])
+    }
+
+    if (userInfo.isRegisteringUser && !loginClass.find((style) => style === classes['Register'])) {
+        console.log('registering')
+        loginClass.push(classes["Register"])
+    }
+
+    if (loginClass.join(' ') !== loginStyle.join(' ')) {
+        setLoginStyle(loginClass)
+    }
+
     return (
-        <div className={isRegisteringUser ? [classes.Login,classes['Register']].join(' ') : classes.Login}>
-            <h1>{isRegisteringUser ? 'REGISTER USER' : 'LOGIN PAGE'}</h1>
+        <div className={loginStyle.join(' ')}>
+            <h1>{userInfo.isRegisteringUser ? 'REGISTER USER' : 'LOGIN PAGE'}</h1>
             {login}
+            {isLoading ? <Spinner/> : null}
             <div className={classes.RegisterDiv}>
                 <p>
                     {loginMessage} 

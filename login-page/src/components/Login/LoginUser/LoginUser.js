@@ -12,7 +12,7 @@ const loginUser = (props) => (
         <br/>
         <Input type='password' id='password' name='password' onChange={props.passwordUpdateHandler}></Input>
         <br/>
-        <Button onClick={props.loginHandler}>
+        <Button onClick={props.loginHandler} isDisabled={props.isDisabled}>
             Login
         </Button>
     </form>

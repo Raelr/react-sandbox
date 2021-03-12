@@ -3,16 +3,36 @@
     margin: auto;
     text-align: center;
     width: 350px;
-    height: 325px;
     padding: 2%;
     border-radius: 5px;
     box-shadow: 1px 1px 5px black;
     overflow: hidden;
     position: relative;
+    overflow: hidden;
+}
+
+.Login.Default {
+    height: 325px;
 }
 
 .Login.Register {
     height: 400px
+}
+
+.Login.Register.Loading {
+    height: 440px
+}
+
+.Login.Loading {
+    height: 380px;    
+    animation-name: login-loading-open;
+    animation-duration: 0.5s;
+}
+
+.Login.Close {
+    height: 325px;    
+    animation-name: login-loading-close;
+    animation-duration: 0.5s;
 }
 
 .RegisterDiv {
@@ -20,6 +40,7 @@
     bottom: 0;
     width: inherit;
     margin-bottom: 15px;
+    background-color: white;
 }
 
 .RegisterLink {
@@ -30,4 +51,14 @@
 .RegisterLink:hover {
     cursor:pointer;
     text-decoration: underline;
+}
+
+@keyframes login-loading-open {
+    0% {height:325px}
+    100% {height:380px}
+}
+
+@keyframes login-loading-close {
+    0% {height:380px}
+    100% {height:325px}
 }

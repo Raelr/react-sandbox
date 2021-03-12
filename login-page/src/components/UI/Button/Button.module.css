@@ -22,11 +22,11 @@
 }
 
 @keyframes start-hover {
-    0% {font-size: 14px}
+    0% {font-size: 16px}
     100% {font-size: 20px}
 }
 
 @keyframes end-hover {
     0% {font-size: 20px}
-    100% {font-size: 14px}
+    100% {font-size: 16px}
 }
