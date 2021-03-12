@@ -11,6 +11,7 @@ const Login = () => {
     const [isMatchingPasswords, setIsMatchingPasswords] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
     const [loginStyle, setLoginStyle] = useState([classes.Login, classes['Default']]);
+
     let loginClass = loginStyle;
 
     const loginUserHandler = (event) => {
@@ -98,14 +99,20 @@ const Login = () => {
     }
 
     if (isLoading && !loginClass.find((style) => style === classes['Loading']) ) {
-        console.log('is loading')
         loginClass.splice(loginClass.indexOf(classes['Default']))
         loginClass.push(classes["Loading"])
     }
 
-    if (userInfo.isRegisteringUser && !loginClass.find((style) => style === classes['Register'])) {
-        console.log('registering')
-        loginClass.push(classes["Register"])
+    if (userInfo.isRegisteringUser) {
+        if (!loginClass.find((style) => style === classes['Register'])) {
+            loginClass.splice(loginClass.indexOf(classes['Default']))
+            loginClass.push(classes['Register'])
+        } 
+    } else {
+        if (loginClass.find((style) => style === classes['Register'])) {
+            loginClass.splice(loginClass.indexOf(classes['Register']))
+            loginClass.push(classes['CloseToLogin'])
+        }
     }
 
     if (loginClass.join(' ') !== loginStyle.join(' ')) {
