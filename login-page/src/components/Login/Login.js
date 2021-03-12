@@ -53,6 +53,8 @@ const Login = () => {
             },
         }).then((response) => {
             setIsLoading(false)
+            loginClass.splice(loginClass.indexOf(classes['RegisterLoading']))
+            setLoginStyle([...loginClass, classes['RegisterLoadingClose']])
             console.log(response.data)
         }).catch(error => {
             console.log(error)
@@ -98,22 +100,34 @@ const Login = () => {
         loginMessage = 'Already have an account? Login '
     }
 
-    if (isLoading && !loginClass.find((style) => style === classes['Loading']) ) {
-        loginClass.splice(loginClass.indexOf(classes['Default']))
-        loginClass.push(classes["Loading"])
-    }
-
     if (userInfo.isRegisteringUser) {
         if (!loginClass.find((style) => style === classes['Register'])) {
-            loginClass.splice(loginClass.indexOf(classes['Default']))
-            loginClass.push(classes['Register'])
+            if (loginClass.indexOf(classes['Default']) !== -1 || loginClass.indexOf(classes['Close']) !== -1 || loginClass.indexOf(classes['CloseToLogin']) !== -1) {
+                loginClass.splice(loginClass.indexOf(classes['Default']))
+                loginClass.push(classes['Register'])
+            }
         } 
+        if (isLoading) {
+            if (!loginClass.find((style) => style === classes['RegisterLoading'])) {
+                loginClass.splice(loginClass.indexOf(classes['Register']))
+                loginClass.push(classes['RegisterLoading'])
+            } 
+        }
     } else {
-        if (loginClass.find((style) => style === classes['Register'])) {
+        if (loginClass.find((style) => style === classes['Register']) || loginClass.indexOf(classes['RegisterLoadingClose']) !== -1) {
             loginClass.splice(loginClass.indexOf(classes['Register']))
+            if (loginClass.indexOf(classes['RegisterLoadingClose']) !== -1)
+                loginClass.splice(loginClass.indexOf(classes['RegisterLoadingClose']))
             loginClass.push(classes['CloseToLogin'])
         }
+
+        if (isLoading && !loginClass.find((style) => style === classes['Loading']) ) {
+            loginClass.splice(loginClass.indexOf(classes['Default']))
+            loginClass.push(classes["Loading"])
+        }
     }
+
+    console.log(loginClass.join(' '))
 
     if (loginClass.join(' ') !== loginStyle.join(' ')) {
         setLoginStyle(loginClass)

@@ -21,8 +21,16 @@
     animation-duration: 0.5s;
 }
 
-.Login.Register.Loading {
-    height: 440px
+.Login.RegisterLoading {
+    height: 450px;
+    animation-name: register-loading-open;
+    animation-duration: 0.5s;
+}
+
+.Login.RegisterLoadingClose {
+    height: 400px;
+    animation-name: register-loading-close;
+    animation-duration: 0.5s;
 }
 
 .Login.Loading {
@@ -79,4 +87,14 @@
 @keyframes register-close-to-login {
     0% {height:400px}
     100% {height:325px}
+}
+
+@keyframes register-loading-open {
+    0% {height:400px}
+    100% {height:450px}
+}
+
+@keyframes register-loading-close {
+    0% {height:450px}
+    100% {height:400px}
 }
