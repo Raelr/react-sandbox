@@ -12,11 +12,11 @@
 }
 
 .Login.Default {
-    height: 325px;
+    height: 340px;
 }
 
 .Login.Register {
-    height: 400px;
+    height: 410px;
     animation-name: register-open;
     animation-duration: 0.5s;
 }
@@ -28,7 +28,7 @@
 }
 
 .Login.RegisterLoadingClose {
-    height: 400px;
+    height: 410px;
     animation-name: register-loading-close;
     animation-duration: 0.5s;
 }
@@ -40,13 +40,13 @@
 }
 
 .Login.CloseToLogin {
-    height: 325px;    
+    height: 340px;    
     animation-name: register-close-to-login;
     animation-duration: 0.5s;
 }
 
 .Login.Close {
-    height: 325px;    
+    height: 340px;    
     animation-name: login-loading-close;
     animation-duration: 0.5s;
 }
@@ -70,31 +70,31 @@
 }
 
 @keyframes login-loading-open {
-    0% {height:325px}
+    0% {height:340px}
     100% {height:380px}
 }
 
 @keyframes login-loading-close {
     0% {height:380px}
-    100% {height:325px}
+    100% {height:340px}
 }
 
 @keyframes register-open {
-    0% {height:325px}
-    100% {height:400px}
+    0% {height:340px}
+    100% {height:410px}
 }
 
 @keyframes register-close-to-login {
-    0% {height:400px}
-    100% {height:325px}
+    0% {height:410px}
+    100% {height:340px}
 }
 
 @keyframes register-loading-open {
-    0% {height:400px}
+    0% {height:410px}
     100% {height:450px}
 }
 
 @keyframes register-loading-close {
     0% {height:450px}
-    100% {height:400px}
+    100% {height:410px}
 }
