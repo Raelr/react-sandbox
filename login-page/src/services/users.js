@@ -10,8 +10,8 @@ const authenticateUser = async (username, password) => {
     method: 'post',
     url: endpoints.AUTHENTICATION_ENDPOINT,
     data: {
-      username: username,
-      password: password,
+      username,
+      password,
     },
   }).catch((error) => {
     console.log(error)
@@ -23,8 +23,8 @@ const registerUser = async (username, password) => {
     method: 'post',
     url: endpoints.RESGISTRATION_ENDPOINT,
     data: {
-      username: username,
-      password: password,
+      username,
+      password,
     },
   })
 }

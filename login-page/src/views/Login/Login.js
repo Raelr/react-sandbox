@@ -102,7 +102,11 @@ const Login = () => {
   }
 
   const selectRegisterUserHandler = () => {
-    setLoginState({ username: '', password: '', isRegisteringUser: !loginState.isRegisteringUser })
+    setLoginState({
+      username: '',
+      password: '',
+      isRegisteringUser: !loginState.isRegisteringUser,
+    })
     setLoginStatus('')
   }
 
