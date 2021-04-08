@@ -1,0 +1,33 @@
+import axios from '../axios-users'
+
+const endpoints = {
+  AUTHENTICATION_ENDPOINT: '/app/users/authentication',
+  RESGISTRATION_ENDPOINT: '/app/users/register',
+}
+
+const authenticateUser = async (username, password) => {
+  return axios({
+    method: 'post',
+    url: endpoints.AUTHENTICATION_ENDPOINT,
+    data: {
+      username: username,
+      password: password,
+    },
+  }).catch((error) => {
+    console.log(error)
+  })
+}
+
+const registerUser = async (username, password) => {
+  return axios({
+    method: 'post',
+    url: endpoints.RESGISTRATION_ENDPOINT,
+    data: {
+      username: username,
+      password: password,
+    },
+  })
+}
+
+export default authenticateUser
+export { registerUser }

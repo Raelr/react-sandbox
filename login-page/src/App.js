@@ -1,12 +1,13 @@
 import React from 'react'
-import Login from './components/Login/Login';
+import Login from './views/Login/Login'
+import classes from './App.module.css'
 
 function App() {
   return (
-    <main style={{"marginTop": "72px"}}>
+    <main className={classes.Content}>
       <Login />
-    </main>    
-  );
+    </main>
+  )
 }
 
-export default App;
+export default App
