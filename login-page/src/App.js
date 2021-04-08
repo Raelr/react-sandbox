@@ -1,10 +1,10 @@
 import React from 'react'
 import Login from './views/Login/Login'
-import classes from './App.module.css'
+import './App.css'
 
 function App() {
   return (
-    <main className={classes.Content}>
+    <main className={'Content'}>
       <Login />
     </main>
   )

@@ -1,20 +1,26 @@
 import React, { useState } from 'react'
-import classes from './Input.module.css'
+import './Input.css'
 
 const Input = (props) => {
-  const [inputClass, setInputClass] = useState(classes.Input)
+  const InputState = {
+    DEFAULT: 'Input',
+    SELECTED: 'Input Selected',
+    DESELECTED: 'Input Deselected',
+  }
+
+  const [inputStyle, setInputStyle] = useState(InputState.DEFAULT)
 
   const onFocusHandler = () => {
-    setInputClass([classes.Input, classes['Selected']].join(' '))
+    setInputStyle(InputState.SELECTED)
   }
 
   const onFocusOutHandler = () => {
-    setInputClass([classes.Input, classes['Deselected']].join(' '))
+    setInputStyle(InputState.DESELECTED)
   }
 
   return (
     <input
-      className={inputClass}
+      className={inputStyle}
       onBlur={onFocusOutHandler}
       onFocusCapture={onFocusHandler}
       type={props.type}
