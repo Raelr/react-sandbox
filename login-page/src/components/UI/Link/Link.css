@@ -1,0 +1,8 @@
+.Link {
+    display: inline
+}
+
+.Link:hover {
+    cursor:pointer;
+    text-decoration: underline;
+}
