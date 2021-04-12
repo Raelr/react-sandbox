@@ -12,7 +12,7 @@
 }
 
 .Login.Default {
-    height: 340px;
+    height: 360px;
 }
 
 .Login.Register {
@@ -34,19 +34,19 @@
 }
 
 .Login.Loading {
-    height: 400px;    
+    height: 430px;    
     animation-name: login-loading-open;
     animation-duration: 0.5s;
 }
 
 .Login.CloseToLogin {
-    height: 340px;    
+    height: 370px;    
     animation-name: register-close-to-login;
     animation-duration: 0.5s;
 }
 
 .Login.Close {
-    height: 360px;    
+    height: 370px;    
     animation-name: login-loading-close;
     animation-duration: 0.5s;
 }
@@ -59,38 +59,28 @@
     background-color: white;
 }
 
-.RegisterLink {
-    display: inline;
-    color:blue
-}
-
-.RegisterLink:hover {
-    cursor:pointer;
-    text-decoration: underline;
-}
-
 @keyframes login-loading-open {
-    0% {height:360px}
-    100% {height:400px}
+    0% {height:370px}
+    100% {height:430px}
 }
 
 @keyframes login-loading-close {
-    0% {height:400px}
-    100% {height:360px}
+    0% {height:430px}
+    100% {height:370px}
 }
 
 @keyframes register-open {
-    0% {height:360px}
-    100% {height:410px}
+    0% {height:370px}
+    100% {height:430px}
 }
 
 @keyframes register-close-to-login {
-    0% {height:410px}
-    100% {height:340px}
+    0% {height:430px}
+    100% {height:350px}
 }
 
 @keyframes register-loading-open {
-    0% {height:410px}
+    0% {height:430px}
     100% {height:480px}
 }
 

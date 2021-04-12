@@ -1,50 +1,31 @@
 import React, { useState } from 'react'
 import authenticateUser from '../../../services/users'
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import Button from '../../../components/UI/Button/Button'
-import Label from '../../../components/UI/Label/Label'
-import Input from '../../../components/UI/Input/Input'
 import Link from '../../../components/UI/Link'
+import Form from '../../../components/UI/Form/Form'
 
 const loginUser = (props) => {
   const [loginCredentials, setLoginCredentials] = useState({
-    userData: {
-      username: '',
-      password: '',
-    },
     message: '',
     isLoading: false,
   })
 
-  const usernameChangedhandler = ({ target }) => {
-    const username = target.value
-    const updatedUserData = { ...loginCredentials.userData, username }
-    setLoginCredentials({
+  const setIsLoading = (isLoading) => {
+    const updatedLoginCredentials = {
       ...loginCredentials,
-      userData: updatedUserData,
-    })
+      isLoading,
+    }
+    setLoginCredentials(updatedLoginCredentials)
   }
 
-  const passwordChangedhandler = ({ target }) => {
-    const password = target.value
-    const updatedUserData = { ...loginCredentials.userData, password }
-    setLoginCredentials({
-      ...loginCredentials,
-      userData: updatedUserData,
-    })
-  }
-
-  const loginUserhandler = (event) => {
+  const onFormSubmitted = (event, formData) => {
     event.preventDefault()
+
+    const username = formData.formData['username'].value
+    const password = formData.formData['password'].value
 
     props.loginLoadingHandler(true)
     setIsLoading(true)
-
-    const {
-      userData: { username, password },
-    } = loginCredentials
-
-    console.log(username)
 
     authenticateUser(username, password)
       .then((response) => {
@@ -67,28 +48,44 @@ const loginUser = (props) => {
       })
   }
 
-  const setIsLoading = (isLoading) => {
-    const updatedLoginCredentials = {
-      ...loginCredentials,
-      userData: { ...loginCredentials.userData },
-      isLoading,
-    }
-    setLoginCredentials(updatedLoginCredentials)
+  const formData = {
+    formData: {
+      username: {
+        elementType: 'input',
+        config: {
+          type: 'text',
+          placeholder: 'Username',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      password: {
+        elementType: 'input',
+        config: {
+          type: 'password',
+          placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+    },
+    formIsValid: false,
+    submitHandler: onFormSubmitted,
   }
 
   return (
     <>
       <h1>LOGIN PAGE</h1>
-      <form>
-        <Label label="username">Username:</Label>
-        <Input type="text" id="username" name="username" onChange={usernameChangedhandler} />
-        <Label label="password">Password:</Label>
-        <Input type="password" id="password" name="password" onChange={passwordChangedhandler} />
-        <Button onClick={loginUserhandler} isDisabled={loginCredentials.userData.isLoading}>
-          Login
-        </Button>
-      </form>
-      {loginCredentials.isLoading ? <Spinner /> : loginCredentials.message}
+      <Form formData={formData} formEnabeled={!loginCredentials.isLoading} />
+      {loginCredentials.isLoading ? <Spinner /> : <p>{loginCredentials.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
           preLinkText={"Don't have an account? Register "}

@@ -1,5 +1,5 @@
 .Input {
-    margin: 10px;
+    margin: 15px;
     width: 200px;
     height: 30px;
     border-radius: 5px;
@@ -8,6 +8,14 @@
     font-size: 20px;
     text-align: center;
 }
+
+.Label {
+    font-weight:normal;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: block;
+    text-transform: capitalize;
+} 
 
 .Input.Selected {
     font-size: 30px;

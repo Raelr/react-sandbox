@@ -18,18 +18,31 @@ const Input = (props) => {
     setInputStyle(InputState.DESELECTED)
   }
 
+  let inputElement = null
+
+  switch (props.elementType) {
+    case 'input':
+      inputElement = (
+        <input
+          className={inputStyle}
+          {...props.config}
+          onBlur={onFocusOutHandler}
+          onFocusCapture={onFocusHandler}
+          id={props.id}
+          name={props.id}
+          onChange={props.onChange}
+        />
+      )
+      break
+  }
+
   return (
-    <input
-      className={inputStyle}
-      onBlur={onFocusOutHandler}
-      onFocusCapture={onFocusHandler}
-      type={props.type}
-      id={props.id}
-      name={props.name}
-      onChange={(event) => props.onChange(event)}
-    >
-      {props.children}
-    </input>
+    <>
+      <label className={'Label'} lable={props.label}>
+        {props.label}
+      </label>
+      {inputElement}
+    </>
   )
 }
 

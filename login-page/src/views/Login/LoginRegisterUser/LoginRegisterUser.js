@@ -83,6 +83,11 @@ const loginRegisterUser = (props) => {
     setRegistrationData(updatedRegistrationData)
   }
 
+  const isValid =
+    !registrationData.isMatchingPasswords ||
+    !registrationData.userData.username.length > 0 ||
+    registrationData.userData.isLoading
+
   return (
     <>
       <h1>REGISTER USER</h1>
@@ -93,18 +98,11 @@ const loginRegisterUser = (props) => {
         <Input type="password" id="password" name="password" onChange={passwordChangedhandler} />
         <Label label="confirmPassword">Confirm Password:</Label>
         <Input type="password" id="confirmPassword" name="password" onChange={confirmPasswordUpdateHandler} />
-        <Button
-          onClick={registerUserhandler}
-          isDisabled={
-            !registrationData.isMatchingPasswords ||
-            !registrationData.userData.username.length > 0 ||
-            registrationData.userData.isLoading
-          }
-        >
+        <Button onClick={registerUserhandler} isDisabled={isValid}>
           Register
         </Button>
       </form>
-      {registrationData.isLoading ? <Spinner /> : registrationData.message}
+      {registrationData.isLoading ? <Spinner /> : <p>{registrationData.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
           preLinkText={'Already have an account? Login '}
