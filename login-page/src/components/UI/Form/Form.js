@@ -47,6 +47,7 @@ const Form = (props) => {
     return isFormValid
   }
 
+  console.log(props.formEnabled)
   return (
     <form>
       {formElementsArray.map((formElement) => (
@@ -58,7 +59,10 @@ const Form = (props) => {
           onChange={(event) => onInputUpdatedHandler(event, formElement.id)}
         />
       ))}
-      <Button isDisabled={!formData.formIsValid && props.formEnabeled} onClick={(event) => formData.submitHandler(event, formData)}>
+      <Button
+        isDisabled={!formData.formIsValid || !props.formEnabled}
+        onClick={(event) => formData.submitHandler(event, formData)}
+      >
         Login
       </Button>
     </form>

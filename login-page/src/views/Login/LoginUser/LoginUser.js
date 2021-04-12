@@ -84,7 +84,7 @@ const loginUser = (props) => {
   return (
     <>
       <h1>LOGIN PAGE</h1>
-      <Form formData={formData} formEnabeled={!loginCredentials.isLoading} />
+      <Form formData={formData} formEnabled={!loginCredentials.isLoading} />
       {loginCredentials.isLoading ? <Spinner /> : <p>{loginCredentials.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
