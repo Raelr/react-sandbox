@@ -4,7 +4,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import Link from '../../../components/UI/Link'
 import Form from '../../../components/UI/Form/Form'
 
-const loginUser = (props) => {
+const LoginUser = (props) => {
   const [loginCredentials, setLoginCredentials] = useState({
     message: '',
     isLoading: false,
@@ -98,4 +98,4 @@ const loginUser = (props) => {
   )
 }
 
-export default loginUser
+export default LoginUser

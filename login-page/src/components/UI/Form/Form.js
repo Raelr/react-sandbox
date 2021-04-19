@@ -34,7 +34,7 @@ const Form = (props) => {
 
     if (rules == null) return isValid
 
-    if (rules.required) (isValid = value != '') && isValid
+    if (rules.required) isValid = value != '' && isValid
 
     return isValid
   }

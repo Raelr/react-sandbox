@@ -6,7 +6,7 @@ import Input from '../../../components/UI/Input/Input'
 import Link from '../../../components/UI/Link'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 
-const loginRegisterUser = (props) => {
+const LoginRegisterUser = (props) => {
   const [registrationData, setRegistrationData] = useState({
     userData: {
       username: '',
@@ -115,4 +115,4 @@ const loginRegisterUser = (props) => {
   )
 }
 
-export default loginRegisterUser
+export default LoginRegisterUser
