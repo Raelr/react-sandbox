@@ -11,6 +11,8 @@ Currently, the project is comprised of three different sub-projects:
 1. test-project
 2. assignment-one
 3. assignment-two
+4. assingment-three
+5. login-page
 
 ### Test-project
 
@@ -23,6 +25,14 @@ This project is based off an assignment that was provided in the above Udemy Cou
 ### Assignment-two
 
 This assignment involves inputting a string into a text field. The inputted string will then be broken up into multiple characters which will then be displayed as spearate `divs`. Clicking on a character will remove the character from the original string and remove the div itself. 
+
+### Assignement-three
+
+The assignment involved transforming a project from manually handling state to handling state via redux. 
+
+### Login-page
+
+This is more of an involved project. The idea was to create a login page that simulates logging into an application. The react code is stored in the repository itself, but it also connects to a `crystal` backend and postgres database. 
 
 ## Setup
 
