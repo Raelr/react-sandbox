@@ -3,8 +3,9 @@ import authenticateUser from '../../../services/users'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Link from '../../../components/UI/Link'
 import Form from '../../../components/UI/Form/Form'
+import formConfig from './formConfig'
 
-const LoginUser = (props) => {
+const LoginUserForm = (props) => {
   const [loginCredentials, setLoginCredentials] = useState({
     message: '',
     isLoading: false,
@@ -48,43 +49,10 @@ const LoginUser = (props) => {
       })
   }
 
-  const formData = {
-    formData: {
-      username: {
-        elementType: 'input',
-        config: {
-          type: 'text',
-          placeholder: 'Username',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      password: {
-        elementType: 'input',
-        config: {
-          type: 'password',
-          placeholder: 'Password',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-    },
-    formIsValid: false,
-    submitHandler: onFormSubmitted,
-  }
-
   return (
     <>
       <h1>LOGIN PAGE</h1>
-      <Form formData={formData} formEnabled={!loginCredentials.isLoading} />
+      <Form formData={{ ...formConfig, submitHandler: onFormSubmitted }} formEnabled={!loginCredentials.isLoading} />
       {loginCredentials.isLoading ? <Spinner /> : <p>{loginCredentials.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
@@ -98,4 +66,4 @@ const LoginUser = (props) => {
   )
 }
 
-export default LoginUser
+export default LoginUserForm

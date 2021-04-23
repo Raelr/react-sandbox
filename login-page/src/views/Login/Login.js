@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
-import LoginUser from './LoginUser/LoginUser'
-import LoginRegisterUser from './LoginRegisterUser/LoginRegisterUser'
+import LoginUserForm from './LoginUserForm/LoginUserForm'
+import RegisterUserForm from './RegisterUserForm/RegisterUserForm'
 
 const Login = () => {
   const loginStates = {
@@ -38,13 +38,13 @@ const Login = () => {
   return (
     <div className={loginStyle}>
       {loginState.isRegisteringUser ? (
-        <LoginRegisterUser
+        <RegisterUserForm
           transitionHandler={selectRegisterUserHandler}
           registerLoadingHandler={registerLoadingStateHandler}
           loginState={loginState}
         />
       ) : (
-        <LoginUser
+        <LoginUserForm
           registrationSelectedHandler={selectRegisterUserHandler}
           transitionHandler={selectRegisterUserHandler}
           loginLoadingHandler={loginLoadingStateHandler}

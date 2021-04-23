@@ -3,8 +3,9 @@ import { registerUser } from '../../../services/users'
 import Link from '../../../components/UI/Link'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Form from '../../../components/UI/Form/Form'
+import formConfig from './formConfig'
 
-const LoginRegisterUser = (props) => {
+const RegisterUserForm = (props) => {
   const [registrationData, setRegistrationData] = useState({
     message: '',
     isLoading: false,
@@ -48,62 +49,13 @@ const LoginRegisterUser = (props) => {
     setRegistrationData(updatedRegistrationData)
   }
 
-  // const isValid =
-  //   !registrationData.isMatchingPasswords ||
-  //   !registrationData.userData.username.length > 0 ||
-  //   registrationData.userData.isLoading
-
-  const formData = {
-    formData: {
-      username: {
-        elementType: 'input',
-        config: {
-          type: 'text',
-          placeholder: 'Username',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      password: {
-        elementType: 'input',
-        config: {
-          type: 'password',
-          placeholder: 'Password',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      confirmPassword: {
-        elementType: 'input',
-        config: {
-          type: 'password',
-          placeholder: 'Password',
-        },
-        value: '',
-        validation: {
-          required: true,
-          requiredEqualityTo: 'password',
-        },
-        valid: false,
-        touched: false,
-      },
-    },
-    formIsValid: false,
-    submitHandler: registerUserhandler,
-  }
-
   return (
     <>
       <h1>REGISTER USER</h1>
-      <Form formData={formData} formEnabled={!registrationData.isLoading} />
+      <Form
+        formData={{ ...formConfig, submitHandler: registerUserhandler }}
+        formEnabled={!registrationData.isLoading}
+      />
       {registrationData.isLoading ? <Spinner /> : <p>{registrationData.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
@@ -117,4 +69,4 @@ const LoginRegisterUser = (props) => {
   )
 }
 
-export default LoginRegisterUser
+export default RegisterUserForm
