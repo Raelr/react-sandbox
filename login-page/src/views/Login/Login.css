@@ -2,7 +2,7 @@
     align-items: center;
     margin: auto;
     text-align: center;
-    width: 360px;
+    width: 380px;
     padding: 2%;
     border-radius: 5px;
     box-shadow: 1px 1px 5px black;
@@ -12,41 +12,41 @@
 }
 
 .Login.Default {
-    height: 360px;
+    height: 380px;
 }
 
 .Login.Register {
-    height: 410px;
+    height: 470px;
     animation-name: register-open;
     animation-duration: 0.5s;
 }
 
 .Login.RegisterLoading {
-    height: 480px;
+    height: 540px;
     animation-name: register-loading-open;
     animation-duration: 0.5s;
 }
 
 .Login.RegisterLoadingClose {
-    height: 440px;
+    height: 510px;
     animation-name: register-loading-close;
     animation-duration: 0.5s;
 }
 
 .Login.Loading {
-    height: 430px;    
+    height: 440px;    
     animation-name: login-loading-open;
     animation-duration: 0.5s;
 }
 
 .Login.CloseToLogin {
-    height: 370px;    
+    height: 380px;    
     animation-name: register-close-to-login;
     animation-duration: 0.5s;
 }
 
 .Login.Close {
-    height: 370px;    
+    height: 400px;    
     animation-name: login-loading-close;
     animation-duration: 0.5s;
 }
@@ -60,31 +60,31 @@
 }
 
 @keyframes login-loading-open {
-    0% {height:370px}
-    100% {height:430px}
+    0% {height:380px}
+    100% {height:440px}
 }
 
 @keyframes login-loading-close {
-    0% {height:430px}
-    100% {height:370px}
+    0% {height:440px}
+    100% {height:400px}
 }
 
 @keyframes register-open {
-    0% {height:370px}
-    100% {height:430px}
+    0% {height:380px}
+    100% {height:470px}
 }
 
 @keyframes register-close-to-login {
-    0% {height:430px}
-    100% {height:350px}
+    0% {height:460px}
+    100% {height:380px}
 }
 
 @keyframes register-loading-open {
-    0% {height:430px}
-    100% {height:480px}
+    0% {height:460px}
+    100% {height:540px}
 }
 
 @keyframes register-loading-close {
-    0% {height:480px}
-    100% {height:440px}
+    0% {height:540px}
+    100% {height:510px}
 }

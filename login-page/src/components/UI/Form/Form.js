@@ -36,6 +36,11 @@ const Form = (props) => {
 
     if (rules.required) isValid = value != '' && isValid
 
+    if (rules.requiredEqualityTo) {
+      let requiredEqualityValue = formData.formData[rules.requiredEqualityTo].value
+      if (requiredEqualityValue) isValid = value == requiredEqualityValue && isValid
+    }
+
     return isValid
   }
 
@@ -47,7 +52,6 @@ const Form = (props) => {
     return isFormValid
   }
 
-  console.log(props.formEnabled)
   return (
     <form>
       {formElementsArray.map((formElement) => (

@@ -1,54 +1,20 @@
 import React, { useState } from 'react'
 import { registerUser } from '../../../services/users'
-import Button from '../../../components/UI/Button/Button'
-import Label from '../../../components/UI/Label/Label'
-import Input from '../../../components/UI/Input/Input'
 import Link from '../../../components/UI/Link'
 import Spinner from '../../../components/UI/Spinner/Spinner'
+import Form from '../../../components/UI/Form/Form'
 
 const LoginRegisterUser = (props) => {
   const [registrationData, setRegistrationData] = useState({
-    userData: {
-      username: '',
-      password: '',
-    },
     message: '',
     isLoading: false,
-    isMatchingPasswords: false,
   })
 
-  const usernameChangedhandler = ({ target }) => {
-    const username = target.value
-    const updatedUserData = { ...registrationData.userData, username }
-    setRegistrationData({
-      ...registrationData,
-      userData: updatedUserData,
-    })
-  }
-
-  const passwordChangedhandler = ({ target }) => {
-    const password = target.value
-    const updatedUserData = { ...registrationData.userData, password }
-    setRegistrationData({
-      ...registrationData,
-      userData: updatedUserData,
-    })
-  }
-
-  const confirmPasswordUpdateHandler = ({ target }) => {
-    const input = target.value
-    const { password } = registrationData.userData
-    const updatedRegistrationData = {
-      ...registrationData,
-      isMatchingPasswords: input === password && input.length > 0 && password.length > 0,
-    }
-    setRegistrationData(updatedRegistrationData)
-  }
-
-  const registerUserhandler = (event) => {
+  const registerUserhandler = (event, formData) => {
     event.preventDefault()
 
-    const { username, password } = registrationData.userData
+    const username = formData.formData['username'].value
+    const password = formData.formData['password'].value
 
     props.registerLoadingHandler(true)
     setIsLoading(true)
@@ -77,31 +43,67 @@ const LoginRegisterUser = (props) => {
   const setIsLoading = (isLoading) => {
     const updatedRegistrationData = {
       ...registrationData,
-      userData: { ...registrationData.userData },
-      isLoading,
+      isLoading: isLoading,
     }
     setRegistrationData(updatedRegistrationData)
   }
 
-  const isValid =
-    !registrationData.isMatchingPasswords ||
-    !registrationData.userData.username.length > 0 ||
-    registrationData.userData.isLoading
+  // const isValid =
+  //   !registrationData.isMatchingPasswords ||
+  //   !registrationData.userData.username.length > 0 ||
+  //   registrationData.userData.isLoading
+
+  const formData = {
+    formData: {
+      username: {
+        elementType: 'input',
+        config: {
+          type: 'text',
+          placeholder: 'Username',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      password: {
+        elementType: 'input',
+        config: {
+          type: 'password',
+          placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      confirmPassword: {
+        elementType: 'input',
+        config: {
+          type: 'password',
+          placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+          required: true,
+          requiredEqualityTo: 'password',
+        },
+        valid: false,
+        touched: false,
+      },
+    },
+    formIsValid: false,
+    submitHandler: registerUserhandler,
+  }
 
   return (
     <>
       <h1>REGISTER USER</h1>
-      <form>
-        <Label label="username">Username:</Label>
-        <Input type="text" id="username" name="username" onChange={usernameChangedhandler} />
-        <Label label="password">Password:</Label>
-        <Input type="password" id="password" name="password" onChange={passwordChangedhandler} />
-        <Label label="confirmPassword">Confirm Password:</Label>
-        <Input type="password" id="confirmPassword" name="password" onChange={confirmPasswordUpdateHandler} />
-        <Button onClick={registerUserhandler} isDisabled={isValid}>
-          Register
-        </Button>
-      </form>
+      <Form formData={formData} formEnabled={!registrationData.isLoading} />
       {registrationData.isLoading ? <Spinner /> : <p>{registrationData.message}</p>}
       <div className={'RegisterDiv'}>
         <Link
